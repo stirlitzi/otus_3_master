@@ -44,7 +44,7 @@ before_script:
 #script:
 #  - cmake .
 #  - cmake --build .
-#    - cmake --build . --target test
+
 deploy:
   provider: script
   skip_cleanup: true
