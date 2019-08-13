@@ -49,5 +49,5 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - curl -T otus_3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -u stirlitzi:$BINTRAY_API_KEY "https://api.bintray.com/content/test195/otus-3-master/otus-3-master/$TRAVIS_BUILD_NUMBER/otus-3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -T otus_3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -u stirlitzi:$BINTRAY_API_KEY "https://api.bintray.com/content/test195/otus-3-master/$TRAVIS_BUILD_NUMBER/otus-3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 
