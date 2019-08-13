@@ -3,13 +3,13 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: "ppa:beineri/opt-qt-5.10.1-trusty"
+#      - sourceline: "ppa:beineri/opt-qt-5.10.1-trusty"
     packages:
       - gcc-7
       - g++-7
-      - qt510-meta-minimal
-      - qt510svg
-      - qt510imageformats
+#      - qt510-meta-minimal
+#      - qt510svg
+#      - qt510imageformats
 #      - qt510tools
 
 before_install:
