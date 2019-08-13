@@ -1,0 +1,55 @@
+language: cpp
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: "ppa:beineri/opt-qt-5.10.1-trusty"
+    packages:
+      - gcc-7
+      - g++-7
+      - qt510-meta-minimal
+      - qt510svg
+      - qt510imageformats
+      - qt510tools
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    brew update ;
+    brew install qt5 cmake ;
+    brew link --force qt ;
+    fi
+
+script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    export CC=gcc-7 ;
+    export CXX=g++-7 ;
+    source /opt/qt510/bin/qt510-env.sh ;
+    fi
+  - cmake --version
+  - qmake --version
+  - cmake .
+  - cmake --build .
+#  - cmake --build . --target test
+  - cmake --build . --target package
+
+before_script:
+#  - sudo apt-get install -y libgtest-dev
+#  - cd /usr/src/gtest
+#  - sudo env "PATH=$PATH" cmake CMakeLists.txt
+#  - sudo make
+#  - sudo cp *.a /usr/lib
+  - sudo apt-get install libboost-test-dev -y
+  - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
+  - echo ""
+  - sudo apt-get update -qq
+#script:
+#  - cmake .
+#  - cmake --build .
+#    - cmake --build . --target test
+#  - cmake --build . --target package
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - curl -T otus_3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -u stirlitzi:$BINTRAY_API_KEY "https://api.bintray.com/content/test195/otus-3-master/otus-3-master/$TRAVIS_BUILD_NUMBER/otus-3-master-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+
