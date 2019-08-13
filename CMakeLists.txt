@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(otus_3_master main.cpp worstallocator.h worstvector.h)
 
-install(TARGETS otus_2_cli RUNTIME DESTINATION bin)
+install(TARGETS otus_3_master RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
