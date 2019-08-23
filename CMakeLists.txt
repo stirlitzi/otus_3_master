@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12.4)
-project(otus-3-master VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-
+#project(otus-3-master VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(otus-3-master)
 
 set(CMAKE_CXX_STANDARD 17)
 

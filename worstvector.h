@@ -1,17 +1,5 @@
-// 
-// Created on 13.08.2019.
-// 
-
-#ifndef TEST_WORSTVECTOR_H
-#define TEST_WORSTVECTOR_H
-
-#endif //TEST_WORSTVECTOR_H 
-
-
 #pragma once
-
 #include <cstdlib>
-#include "worstallocator.h"
 
 
 template<typename T, typename _Alloc = std::allocator<T>>
@@ -20,23 +8,26 @@ public:
     using Alloc = typename _Alloc::template rebind<T>::other;
 
     WorstVector() {
-        data_ = nullptr;
-        end_ = data_;
         size_ = 0;
-        capa_ = 0;
+        capa_ = 10;
+        data_ = allocator.allocate(capa_);
+        end_ = data_;
+
     }
 
     explicit WorstVector(size_t size) {
         size_ = size;
         capa_ = 2 * size_;
-        data_ = new T[capa_];
+//        data_ = new T[capa_];
+data_ = allocator.allocate(capa_);
         end_ = data_ + size;
     }
 
     ~WorstVector() {
-        if (data_ != nullptr) {
-            delete[] data_;
-        }
+//        if (data_ != nullptr) {
+//            delete[] data_;
+//        }
+allocator.deallocate(data_, capa_);
         capa_ = 0;
         size_ = 0;
     }
@@ -90,7 +81,7 @@ void WorstVector<T, Allocator>::PushBack(const T &value) {
         for (size_t i = 0; i < size_; i++) {
             ptr[i] = data_[i];
         }
-        delete[] data_;
+        allocator.deallocate(data_, capa_);
         data_ = ptr;
         data_[size_++] = value;
         end_ = data_ + size_;
@@ -98,4 +89,4 @@ void WorstVector<T, Allocator>::PushBack(const T &value) {
         data_[size_++] = value;
         end_ = data_ + size_;
     }
-} 
+}
